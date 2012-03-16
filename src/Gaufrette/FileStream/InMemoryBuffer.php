@@ -155,4 +155,27 @@ class InMemoryBuffer implements FileStream
     {
         return $this->position >= $this->numBytes;
     }
+
+    public function fstat()
+    {
+        $stat = array(
+            'dev' => 2,
+            'ino' => 0,
+            'mode' => 0,
+            'nlink' => 1,
+            'uid' => 0,
+            'gid' => 0,
+            'rdev' => 2,
+            'size' => $this->numBytes,
+            'atime' => $this->adapter->mtime($this->key),
+            'mtime' => $this->adapter->mtime($this->key),
+            'ctime' => $this->adapter->mtime($this->key),
+            'blksize' => -1,
+            'blocks' => -1
+        );
+
+        $stat = $stat + array_values($stat);
+
+        return $stat;
+    }
 }

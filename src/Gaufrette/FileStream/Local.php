@@ -113,4 +113,14 @@ class Local implements FileStream
     {
         return feof($this->fileHandle);
     }
+
+    public function fstat()
+    {
+        return fstat($this->fileHandle);
+    }
+
+    public function stat()
+    {
+        return stat($this->path);
+    }
 }
